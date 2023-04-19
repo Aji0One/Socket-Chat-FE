@@ -19,7 +19,7 @@ import ScrollableChat from "./ScrollableChat";
 import LottieView from "lottie-react";
 import animationData from "../animations/typing.json";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://chat-io-b7g3.onrender.com";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
