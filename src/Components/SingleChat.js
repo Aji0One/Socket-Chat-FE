@@ -40,7 +40,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     try {
       const config = {
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       };
@@ -52,7 +52,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       );
       setMessage(data);
       setLoading(false);
-
       socket.emit("join chat", selectedChat._id);
     } catch (err) {
       toast({
@@ -72,7 +71,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       try {
         const config = {
           headers: {
-            "Content-type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}`,
           },
         };
@@ -110,8 +109,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   }, []);
 
   useEffect(() => {
+    fetchMessages();
+
+    selectedChatCompare = selectedChat;
+  }, [selectedChat]);
+
+  useEffect(() => {
     socket.on("message received", (newMessageReceived) => {
-      console.log(newMessageReceived);
       if (
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageReceived.chat._id
@@ -125,12 +129,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     });
   });
-
-  useEffect(() => {
-    fetchMessages();
-
-    selectedChatCompare = selectedChat;
-  }, [selectedChat]);
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
@@ -217,7 +215,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               </div>
             )}
 
-            <FormControl onKeyDown={sendMessage} isRequired mt={3}>
+            <FormControl
+              onKeyDown={sendMessage}
+              isRequired
+              mt={3}
+              id="first-name"
+            >
               {isTyping ? (
                 <div>
                   <LottieView

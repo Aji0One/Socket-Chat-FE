@@ -43,6 +43,7 @@ const SideDrawer = () => {
     notification,
     setNotification,
   } = ChatState();
+
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -90,7 +91,7 @@ const SideDrawer = () => {
       setLoadingChat(true);
       const config = {
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       };
@@ -114,6 +115,7 @@ const SideDrawer = () => {
       });
     }
   };
+
   const handleLogout = () => {
     localStorage.removeItem("userInfo");
     navigate("/");
@@ -174,7 +176,7 @@ const SideDrawer = () => {
                 >
                   {notify.chat.isGroupChat
                     ? `New Message in ${notify.chat.chatName}`
-                    : `New Message from ${getSender(user, notify.chat.users)}`}
+                    : `New Message Received`}
                 </MenuItem>
               ))}
             </MenuList>
